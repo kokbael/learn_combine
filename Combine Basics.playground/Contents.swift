@@ -33,3 +33,21 @@ temperatureSubject.send(22.5)
 temperatureSubject.send(25.0)
 
 print("현재 저장된 온도: \(temperatureSubject.value)°C")
+
+print("--------------------------------------------------")
+
+// PassthroughSubject: 값을 저장하지 않고 단순히 전달만 하는 Publisher
+let notificationSubject = PassthroughSubject<String, Never>()
+
+print("알림 메시지를 구독합니다...")
+
+let notificationSubscription =  notificationSubject.sink { message in
+    print("알림: \(message)")
+}
+
+print("알림을 보냅니다...")
+
+notificationSubject.send("새로운 메시지가 도착했습니다")
+
+notificationSubscription.cancel()
+notificationSubject.send("앱이 업데이트 되었습니다.")
