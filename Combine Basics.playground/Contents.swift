@@ -51,3 +51,29 @@ notificationSubject.send("새로운 메시지가 도착했습니다")
 
 notificationSubscription.cancel()
 notificationSubject.send("앱이 업데이트 되었습니다.")
+
+print("\n5️⃣ @Published - 속성 값 변경을 자동으로 발행하기")
+print("------------------------------------------------")
+
+class WeatherStation {
+    // @Published 속성은 자동으로 Publisher를 생성합니다
+    @Published var temperature: Double = 15.0
+    @Published var weatherCondition: String = "맑음"
+}
+
+// 날씨 관측소 인스턴스 생성
+let station = WeatherStation()
+
+// $기호를 사용하여 Publisher에 접근
+let stationTempSubscription = station.$temperature.sink { temp in
+    print("👉 현재 온도: \(temp)°C")
+}
+
+let stationConditionSubscription = station.$weatherCondition.sink { condition in
+    print("👉 날씨 상태: \(condition)")
+}
+
+// 속성 값 변경 (변경 시 자동으로 발행됨)
+print("날씨 정보를 업데이트합니다...")
+station.temperature = 18.5
+station.weatherCondition = "비"
