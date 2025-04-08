@@ -35,6 +35,7 @@ class SignUpFormViewModel: ObservableObject {
     @Published var usernameMessage: String = ""
     @Published var passwordMessage: String = ""
     @Published var isValid: Bool = false
+    @Published var showUpdateDialog: Bool = false
     
     var authenticationService = AuthenticationService()
     
@@ -45,17 +46,17 @@ class SignUpFormViewModel: ObservableObject {
             .eraseToAnyPublisher()
     }()
     
-    private lazy var isUsernameAvaliablePublisher: AnyPublisher<Available, Never> = {
+    private lazy var isUsernameAvailablePublisher: AnyPublisher<Available, Never> = {
         $username
             .debounce(for: 0.8, scheduler: DispatchQueue.main)
             .removeDuplicates()
-            .compactMap { username -> String? in
-                // 유저 이름이 비어있으면 nil을 반환
-                if username.isEmpty {
-                    return nil
-                }
-                return username
-            }
+//            .compactMap { username -> String? in
+//                // 유저 이름이 비어있으면 nil을 반환
+//                if username.isEmpty {
+//                    return nil
+//                }
+//                return username
+//            }
             .flatMap { username -> AnyPublisher<Available, Never> in
                 return self.authenticationService
                     .checkUserNameAvailablePublisher(userName: username)
@@ -67,7 +68,7 @@ class SignUpFormViewModel: ObservableObject {
     }()
     
     private lazy var isUsernameValidPublisher: AnyPublisher<UserNameValid, Never> = {
-        Publishers.CombineLatest(isUsernameLengthValidPublisher, isUsernameAvaliablePublisher)
+        Publishers.CombineLatest(isUsernameLengthValidPublisher, isUsernameAvailablePublisher)
             .map { isLengthValid, isAvailable in
                 if !isLengthValid {
                     return .tooShort
@@ -107,24 +108,55 @@ class SignUpFormViewModel: ObservableObject {
     
     private lazy var isFormValidPublisher: AnyPublisher<Bool, Never> = {
         Publishers.CombineLatest(isUsernameValidPublisher, isPasswordValidPublisher)
-            .map { $0 == .valid && $1 }
+            .map { ($0 == .valid) && $1 }
             .eraseToAnyPublisher()
     }()
     
     init() {
         // 유저 이름 유효성 검사
-        isUsernameValidPublisher
-            .map { valid in
-                switch valid {
-                case .valid:
-                    return ""
-                case .tooShort:
-                    return "사용자 이름은 3자 이상이어야 합니다."
-                case .notAvailable:
-                    return "사용자 이름이 사용 중입니다."
+        isUsernameAvailablePublisher
+            .map { result in
+                switch result {
+                case .failure(let error):
+                    if case APIError.transportError(_) = error {
+                        return ""
+                    }
+                    else if case APIError.validationError(let reason) = error {
+                        return reason
+                    }
+                    else if case APIError.serverError(_, let reason, _) = error {
+                        return reason
+                    }
+                    else if case APIError.invalidResponse = error {
+                        return "서버 응답이 잘못되었습니다."
+                    }
+                    else if case APIError.invalidRequestError(let reason) = error {
+                        return reason
+                    }
+                    else if case APIError.decodingError(_) = error {
+                        return "서버 응답을 해석하는데 실패했습니다."
+                    }
+                    else {
+                        return error.localizedDescription
+                    }
+                case .success(let isAvailable):
+                    return isAvailable ? "" : "사용할 수 없는 사용자 이름입니다."
                 }
             }
             .assign(to: &$usernameMessage)
+        
+        // 디코딩 오류: 새 버전 다운로드를 제안하는
+        // 오류 메시지 표시
+        isUsernameAvailablePublisher
+            .map { result in
+                if case .failure(let error) = result {
+                    if case APIError.decodingError = error {
+                        return true
+                    }
+                }
+                return false
+            }
+            .assign(to: &$showUpdateDialog)
         
         // 비밀번호 유효성 검사
         Publishers.CombineLatest(isPasswordEmptyPublisher, isPasswordMatchingPublisher)
