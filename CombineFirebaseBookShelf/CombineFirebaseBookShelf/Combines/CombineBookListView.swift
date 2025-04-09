@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct OnDemandBookListViewWithCombine: View {
+struct CombineBookListView: View {
     var body: some View {
         VStack{
             EmptyView()
         }
-        .navigationTitle("Book Live")
+        .navigationTitle("Book List")
     }
 }
