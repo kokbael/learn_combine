@@ -8,6 +8,7 @@
 import SwiftUI
 import FirebaseFirestore
 import FirebaseFirestoreCombineSwift
+import Combine
 
 private class BookDetailViewModel: ObservableObject {
     @Published var book = Book.empty
@@ -15,14 +16,15 @@ private class BookDetailViewModel: ObservableObject {
     
     private var db = Firestore.firestore()
     
-    fileprivate func  fetchBook() {
-        db.collection("books").document("hitchhiker").getDocument()
+    init() {
+        db.collection("books").document("hitchhiker").snapshotPublisher()
             .tryMap { documentSnapshot in
                 try documentSnapshot.data(as: Book.self)
             }
-//            .catch { error in
-//                self.errorMessage = error.localizedDescription
-//            }
+            .catch { error in
+                self.errorMessage = error.localizedDescription
+                return Just(Book.empty).eraseToAnyPublisher()
+            }
             .replaceError(with: Book.empty)
             .assign(to: &$book)
     }
@@ -52,11 +54,5 @@ struct OnDemandBookDetailsViewWithCombine: View {
             }
         }
         .navigationTitle("Book Details")
-        .onAppear {
-            viewModel.fetchBook()
-        }
-        .refreshable {
-            viewModel.fetchBook()
-        }
     }
 }
