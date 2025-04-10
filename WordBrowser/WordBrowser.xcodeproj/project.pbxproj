@@ -53,9 +53,9 @@
 			isa = PBXGroup;
 			children = (
 				0A35D3432DA77B270065D305 /* WordBrowser */,
-				0A35D3422DA77B270065D305 /* Products */,
-				0A35D35C2DA782FC0065D305 /* Dev.xcconfig */,
 				0A35D35E2DA783100065D305 /* Prod.xcconfig */,
+				0A35D35C2DA782FC0065D305 /* Dev.xcconfig */,
+				0A35D3422DA77B270065D305 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -151,6 +151,7 @@
 /* Begin XCBuildConfiguration section */
 		0A35D34D2DA77B280065D305 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0A35D35C2DA782FC0065D305 /* Dev.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -214,6 +215,7 @@
 		};
 		0A35D34E2DA77B280065D305 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0A35D35E2DA783100065D305 /* Prod.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -270,7 +272,6 @@
 		};
 		0A35D3502DA77B280065D305 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0A35D35C2DA782FC0065D305 /* Dev.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -301,7 +302,6 @@
 		};
 		0A35D3512DA77B280065D305 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0A35D35E2DA783100065D305 /* Prod.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

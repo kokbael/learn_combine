@@ -2,15 +2,13 @@
 //  WordsApiViewModel.swift
 //  WordBrowser
 //
-//  Created by 김동영 on 4/10/25.
+//  Created by Jungman Bae on 4/10/25.
 //
-
 
 import SwiftUI
 
 @Observable
-class WordsApiViewModel {
-    var searchTerm: String = ""
+class WordDetailsViewModel {
     var wordResult: Word? = nil
     var isLoading: Bool = false
     var errorMessage: String? = nil
