@@ -6,13 +6,33 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		0A35D35D2DA782FC0065D305 /* Dev.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 0A35D35C2DA782FC0065D305 /* Dev.xcconfig */; };
+		0A35D35F2DA783100065D305 /* Prod.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 0A35D35E2DA783100065D305 /* Prod.xcconfig */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		0A35D3412DA77B270065D305 /* WordBrowser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WordBrowser.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A35D35C2DA782FC0065D305 /* Dev.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Dev.xcconfig; sourceTree = "<group>"; };
+		0A35D35E2DA783100065D305 /* Prod.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Prod.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		0A35D36C2DA784230065D305 /* Exceptions for "WordBrowser" folder in "WordBrowser" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 0A35D3402DA77B270065D305 /* WordBrowser */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		0A35D3432DA77B270065D305 /* WordBrowser */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				0A35D36C2DA784230065D305 /* Exceptions for "WordBrowser" folder in "WordBrowser" target */,
+			);
 			path = WordBrowser;
 			sourceTree = "<group>";
 		};
@@ -34,6 +54,8 @@
 			children = (
 				0A35D3432DA77B270065D305 /* WordBrowser */,
 				0A35D3422DA77B270065D305 /* Products */,
+				0A35D35C2DA782FC0065D305 /* Dev.xcconfig */,
+				0A35D35E2DA783100065D305 /* Prod.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -109,6 +131,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A35D35F2DA783100065D305 /* Prod.xcconfig in Resources */,
+				0A35D35D2DA782FC0065D305 /* Dev.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,6 +270,7 @@
 		};
 		0A35D3502DA77B280065D305 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0A35D35C2DA782FC0065D305 /* Dev.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -255,6 +280,7 @@
 				DEVELOPMENT_TEAM = 59FP2PXRXK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WordBrowser/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -275,6 +301,7 @@
 		};
 		0A35D3512DA77B280065D305 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0A35D35E2DA783100065D305 /* Prod.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -284,6 +311,7 @@
 				DEVELOPMENT_TEAM = 59FP2PXRXK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WordBrowser/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
