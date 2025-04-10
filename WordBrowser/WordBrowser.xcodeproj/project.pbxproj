@@ -18,7 +18,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		0A35D36C2DA784230065D305 /* Exceptions for "WordBrowser" folder in "WordBrowser" target */ = {
+		0A35D36D2DA785B00065D305 /* Exceptions for "WordBrowser" folder in "WordBrowser" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
@@ -31,7 +31,7 @@
 		0A35D3432DA77B270065D305 /* WordBrowser */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				0A35D36C2DA784230065D305 /* Exceptions for "WordBrowser" folder in "WordBrowser" target */,
+				0A35D36D2DA785B00065D305 /* Exceptions for "WordBrowser" folder in "WordBrowser" target */,
 			);
 			path = WordBrowser;
 			sourceTree = "<group>";
